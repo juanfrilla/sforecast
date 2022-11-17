@@ -1,4 +1,4 @@
-# Wavesnitch
+# Sforecast
 
 Automation script that helps me in the task of interpreting when there are waves, scraping data from multiple sites (with threads), spots data from surf-forecast and the one from rising and falling tides.
 
@@ -11,7 +11,7 @@ Asure you have selenium and google chrome installed on your linux machine.
 3. ```python -m venv venv```
 4. ```source venv/bin/activate```
 3. ```pip install -r requirements.txt```
-4. ```asure you downloaded google chrome and chromedriver, and chromedriver its on path (executable_path argument of self.driver property, in windguru.py and tides.py)```
+4. ```asure you downloaded google chrome and chromedriver, and chromedriver its on path (executable_path argument of self.driver property, in sforecast.py and tides.py)```
 5. ```python main.py```
 
 At the end, it will generate a text file (forecast.csv), where you can see all the conditions.
