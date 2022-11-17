@@ -12,7 +12,7 @@ Asure you have selenium and google chrome installed on your linux machine.
 4. ```source venv/bin/activate```
 3. ```pip install -r requirements.txt```
 4. ```asure you downloaded google chrome and chromedriver, and chromedriver its on path```
-5. ```python main.py```
+5. ```python surf_main.py```
 
 At the end, it will generate a text file (forecast.csv), where you can see all the conditions.
 
