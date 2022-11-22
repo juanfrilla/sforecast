@@ -34,9 +34,9 @@ def add_days_to_forecast(forecast):
     for index, time in enumerate(time_list):
         if time == "AM" and index != 0:
             date += timedelta(days=1)
-            days_list.append(date.strftime("%d-%m, %A"))
+            days_list.append(date.strftime("%m-%d, %A"))
         else:
-            days_list.append(date.strftime("%d-%m, %A"))
+            days_list.append(date.strftime("%m-%d, %A"))
     forecast['days'] = days_list
     return forecast
 

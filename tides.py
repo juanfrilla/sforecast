@@ -65,7 +65,7 @@ class TidesScraper(object):
     def get_day_name(self, add: float) -> str:
         today = datetime.date.today()
         day = today + datetime.timedelta(days=add)
-        day_name_number = day.strftime("%d-%m, %A")
+        day_name_number = day.strftime("%m-%d, %A")
 
         return day_name_number
 
