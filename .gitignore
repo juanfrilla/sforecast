@@ -1,0 +1,6 @@
+*.json
+forecast.txt
+venv/
+__pycache__/
+*.csv
+.~lock.forecast.csv#
