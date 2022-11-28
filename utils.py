@@ -1,15 +1,13 @@
-import os, pandas as pd, numpy as np
-from typing import Dict, List
+import os, pandas as pd
+from typing import Dict
 from datetime import datetime, timedelta
 
-from collections import defaultdict
-
 from threadingresult import ThreadWithReturnValue
-from exp_forecast import ForecastScraper
+from forecast_scraper import ForecastScraper
 
 from datetime import time, datetime
 
-from tides import TidesScraper
+from tides_scraper import TidesScraper
 
 
 def df_to_csv(path, df: pd.DataFrame) -> None:
@@ -34,9 +32,9 @@ def add_days_to_forecast(forecast):
     for index, time in enumerate(time_list):
         if time == "AM" and index != 0:
             date += timedelta(days=1)
-            days_list.append(date.strftime("%d-%m, %A"))
+            days_list.append(date.strftime("%m-%d, %A"))
         else:
-            days_list.append(date.strftime("%d-%m, %A"))
+            days_list.append(date.strftime("%m-%d, %A"))
     forecast['days'] = days_list
     return forecast
 
@@ -59,23 +57,25 @@ def combine_df_tides(df, tides_data):
     tides_data = {k: tides_data[k] for k in list(tides_data)[:12]}
 
     for (index, row) in df.iterrows():
-        if 'AM' in row['time'] and 'Subiendo' in tides_data[row['days']][0]:
+        if 'AM' in row['time'] and  row['days'] in tides_data and 'Subiendo' in tides_data[row['days']][0]:
             value = tides_data[row['days']][0]
 
-        elif 'AM' in row['time'] and 'Bajando' in tides_data[row['days']][0]:
+        elif 'AM' in row['time'] and  row['days'] in tides_data and 'Bajando' in tides_data[row['days']][0]:
             value = tides_data[row['days']][1]
         
         # elif 'Bajando' in tides_data[row['days']][0] and 'Bajando' in tides_data[row['days']][1]: TODO corregir que está bajando en dos
         #     value = tides_data[row['days']][1]
         #     print("sssssir", tides_data[row['days']])
 
-        elif 'PM' in row['time'] and 'Subiendo' in tides_data[row['days']][1]:
+        elif 'PM' in row['time'] and  row['days'] in tides_data and 'Subiendo' in tides_data[row['days']][1]:
             value = tides_data[row['days']][1]
-        elif 'PM' in row['time'] and 'Bajando' in tides_data[row['days']][1] and len(tides_data[row['days']]) > 2:
+        elif 'PM' in row['time'] and  row['days'] in tides_data and  'Bajando' in tides_data[row['days']][1] and len(tides_data[row['days']]) > 2:
             value = tides_data[row['days']][2]
-        elif 'Night' in row['time'] and len(tides_data[row['days']]) > 2:
+        elif 'Night' in row['time'] and  row['days'] in tides_data and len(tides_data[row['days']]) > 2:
             value = tides_data[row['days']][2]
-        elif 'Night' in row['time'] and len(tides_data[row['days']]) < 2:
+        elif 'Night' in row['time'] and  row['days'] in tides_data and  len(tides_data[row['days']]) < 2:
+            value = "-"
+        else:
             value = "-"
         df.loc[index, "tides"] = value
     return df
