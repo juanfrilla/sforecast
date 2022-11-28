@@ -1,15 +1,13 @@
-import os, pandas as pd, numpy as np
-from typing import Dict, List
+import os, pandas as pd
+from typing import Dict
 from datetime import datetime, timedelta
 
-from collections import defaultdict
-
 from threadingresult import ThreadWithReturnValue
-from exp_forecast import ForecastScraper
+from forecast_scraper import ForecastScraper
 
 from datetime import time, datetime
 
-from tides import TidesScraper
+from tides_scraper import TidesScraper
 
 
 def df_to_csv(path, df: pd.DataFrame) -> None:
