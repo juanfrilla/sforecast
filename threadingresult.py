@@ -1,4 +1,4 @@
-import threading, time, queue
+import threading
 
 class ThreadWithReturnValue(threading.Thread):
     
